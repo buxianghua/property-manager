@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jake.property.mapper.RepairMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.jake.property.entity.Repair">
+        <id column="id" property="id" />
+        <result column="community_name" property="communityName" />
+        <result column="community_id" property="communityId" />
+        <result column="building_name" property="buildingName" />
+        <result column="building_id" property="buildingId" />
+        <result column="owner_name" property="ownerName" />
+        <result column="owner_id" property="ownerId" />
+        <result column="device_name" property="deviceName" />
+        <result column="device_id" property="deviceId" />
+        <result column="description" property="description" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="status" property="status" />
+    </resultMap>
+
+</mapper>

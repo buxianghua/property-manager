@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>系统登录</title>
+    <link rel="stylesheet" href="css/login.css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="lib/layui/layui.js" charset="utf-8"></script>
+</head>
+
+<body class="login-bg">
+
+    <div class="login">
+        <div class="message">系统登录</div>
+        <div id="darkbannerwrap"></div>
+        <form method="post" class="layui-form">
+            <!-- csrf -->
+            <!-- <input type="hidden" name="${_csrf.parameterName}" value="@{_csrf.token}"/> -->
+            <input name="username" placeholder="用户名" type="text" lay-verify="required" class="layui-input">
+            <hr class="hr15">
+            <input name="password" lay-verify="required" placeholder="密码" type="password" class="layui-input">
+            <hr class="hr10">
+            <input type="checkbox" name="remember-me" title="自动登录" lay-skin="primary" checked>
+            <!-- <hr class="hr15"> -->
+            <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
+            <hr class="hr20">
+        </form>
+    </div>
+    <script>
+        layui.use(['form'],
+            function () {
+                $ = layui.jquery;
+                var form = layui.form(),
+                    layer = layui.layer;
+
+                //监听提交
+                form.on('submit(login)',
+                    function (data) {
+                        $.ajax({
+                            url: '/admin/login',
+                            method: 'POST',
+                            data: data.field,
+                            success: function (data) {
+                                if (data.status == 'error') {
+                                    layer.msg(data.msg, {
+                                        icon: 5
+                                    });
+                                    o.removeClass('layui-btn-disabled');
+                                    return;
+                                } else {
+                                    layer.msg(data.msg, {
+                                        icon: 6, //成功的表情
+                                        time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                                    }, function () {
+                                        window.location.href = "index.html";
+                                        // location.reload();
+                                    });
+                                    // console.log("data:"+data);
+                                }
+
+                            },
+                            error: function () {
+                                $.messager.alert('错误', data.msg);
+                            }
+                        })
+                        return false;
+
+
+                    });
+
+            });
+    </script>
+
+
+    <!-- 底部结束 -->
+
+</body>
+
+</html>
